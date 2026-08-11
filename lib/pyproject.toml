@@ -1,0 +1,13 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ruvic-aws-sqs-connector"
+version = "1.0.0"
+description = "Conector Ruvic para gestión de colas de mensajes con AWS SQS"
+requires-python = ">=3.10"
+dependencies = ["boto3>=1.34,<2.0"]
+
+[tool.setuptools.packages.find]
+include = ["ruvic_aws_sqs_connector*"]

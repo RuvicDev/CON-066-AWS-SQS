@@ -1,0 +1,29 @@
+{
+  "id": "aws_sqs",
+  "name": "AWS SQS",
+  "name_en": "AWS SQS",
+  "version": "1.0.0",
+  "description": "Gestión de colas de mensajes con Amazon Simple Queue Service: enviar, recibir, eliminar mensajes y consultar atributos",
+  "description_en": "Message queue management with Amazon Simple Queue Service: send, receive, delete messages and query attributes",
+  "category": "Cloud AWS",
+  "category_en": "AWS Cloud",
+  "keywords": ["aws", "sqs", "queue", "cola", "mensajes", "message queue"],
+  "icon": "icon.svg",
+  "library": {"package": "ruvic-aws-sqs-connector", "install": "pip install git+https://github.com/montealegre777/conector-AWS_SQS.git#subdirectory=lib", "import_name": "ruvic_aws_sqs_connector"},
+  "auth_modes": [{"id": "access_keys", "label": "AWS Access Keys", "fields": [
+    {"key": "aws_access_key_id", "label": "AWS Access Key ID", "type": "text", "required": true},
+    {"key": "aws_secret_access_key", "label": "AWS Secret Access Key", "type": "password", "secret": true, "required": true},
+    {"key": "aws_session_token", "label": "AWS Session Token", "type": "password", "secret": true, "required": false},
+    {"key": "region", "label": "Región AWS", "type": "text", "required": true, "placeholder": "us-east-1"},
+    {"key": "queue_url", "label": "Queue URL", "type": "text", "required": true, "placeholder": "https://sqs.us-east-1.amazonaws.com/123456789012/mi-cola"},
+    {"key": "wait_time_seconds", "label": "Long polling (segundos)", "type": "number", "required": false, "default": "10"},
+    {"key": "visibility_timeout", "label": "Visibility timeout (segundos)", "type": "number", "required": false},
+    {"key": "max_messages", "label": "Máximo mensajes por recepción", "type": "number", "required": false, "default": "10"},
+    {"key": "allow_delete_message", "label": "Permitir eliminar mensajes", "type": "boolean", "required": false, "default": "false", "help_text": "Bloqueado por defecto porque elimina mensajes de la cola."},
+    {"key": "timeout", "label": "Timeout (segundos)", "type": "number", "required": false, "default": "20"}
+  ]}],
+  "env_prefix": "RUVIC_AWS_SQS_",
+  "operations": ["queue.send_message", "queue.receive_messages", "queue.delete_message", "queue.get_queue_attributes"],
+  "test_connection": true,
+  "docs": {"skill": "SKILL.md", "permissions_note": "El usuario/rol IAM requiere permisos mínimos sqs:GetQueueAttributes, sqs:SendMessage, sqs:ReceiveMessage y, si se habilita explícitamente, sqs:DeleteMessage sobre la cola configurada."}
+}
